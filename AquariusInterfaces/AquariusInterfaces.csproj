@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyVersion>1.2020.0330.0</AssemblyVersion>
+    <FileVersion>1.2020.0330.0</FileVersion>
+  </PropertyGroup>
+
+</Project>

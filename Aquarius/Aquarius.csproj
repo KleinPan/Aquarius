@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>PeterPane</Authors>
+    <Description>水瓶座项目</Description>
+    <PackageIcon>水瓶座.png</PackageIcon>
+    <AssemblyVersion>1.2020.0330.0</AssemblyVersion>
+    <FileVersion>1.2020.0330.0</FileVersion>
+    <ApplicationIcon>水瓶座.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="NLog.Config" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AquariusInterfaces\AquariusInterfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\1\Desktop\Download\水瓶座.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
