@@ -7,14 +7,25 @@
     <Authors>PeterPane</Authors>
     <Description>水瓶座项目</Description>
     <PackageIcon>水瓶座.png</PackageIcon>
-    <AssemblyVersion>1.2020.0330.0</AssemblyVersion>
-    <FileVersion>1.2020.0330.0</FileVersion>
+    <AssemblyVersion>1.2020.0401.0</AssemblyVersion>
+    <FileVersion>1.2020.0401.0</FileVersion>
     <ApplicationIcon>水瓶座.ico</ApplicationIcon>
+    <Company>BaseViewModel</Company>
+    <Copyright>Copyright © 2020</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Aquarius.ico" />
+    <None Remove="Resources\Aquarius.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="HandyControl" Version="2.4.0" />
     <PackageReference Include="NLog.Config" Version="4.7.0" />
+    <PackageReference Include="One.Control" Version="2.0.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.2.3" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +37,15 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Aquarius.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Aquarius.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
