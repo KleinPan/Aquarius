@@ -7,6 +7,11 @@
     <FileVersion>1.2020.0404.0</FileVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>E:\工作\GitHub\Aquarius\Aquarius\bin\Debug\netcoreapp3.1\PluginsDefault\</OutputPath>
+    <DocumentationFile>E:\工作\GitHub\Aquarius\DropYouRem\DropYouRem.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\test.jpg" />
   </ItemGroup>

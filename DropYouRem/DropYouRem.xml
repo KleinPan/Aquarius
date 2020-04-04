@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DropYouRem</name>
+    </assembly>
+    <members>
+        <member name="T:DropYouRem.Views.RemSpriteView">
+            <summary>
+            Interaction logic for RemSprite.xaml
+            </summary>
+            <summary>
+            RemSpriteView
+            </summary>
+        </member>
+        <member name="M:DropYouRem.Views.RemSpriteView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>
