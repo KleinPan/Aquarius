@@ -24,10 +24,15 @@
                         <RowDefinition />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <ListView FontSize="15">
+                    <ListView FontSize="15" ItemsSource="{Binding OCPlugIns}">
+                        <hc:Interaction.Triggers>
+                            <hc:EventTrigger EventName="SelectionChanged">
+                                <hc:EventToCommand Command="{Binding PluginsSwitchItemCmd}" PassEventArgsToCommand="True" />
+                            </hc:EventTrigger>
+                        </hc:Interaction.Triggers>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding Index}" Header="索引" />
+                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding ID}" Header="索引" />
                                 <GridViewColumn Width="100" DisplayMemberBinding="{Binding Name}" Header="名称" />
 
                             </GridView>
@@ -36,11 +41,9 @@
 
                     <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" ShowsPreview="True" />
                     <Grid Grid.Column="2">
-                        <local:PluginInfoView />
+                        <local:PluginInfoView DataContext="{Binding CurrentPluginInfoVM}" />
                     </Grid>
-                    <StackPanel Grid.Row="1">
-                        <Button Command="{Binding ScanPluginsCommand}" Content="扫描" />
-                    </StackPanel>
+                    <Button Grid.Row="1" Margin="2" HorizontalAlignment="Stretch" Command="{Binding ScanPluginsCommand}" Content="扫描" />
                 </Grid>
             </hc:TabItem>
             <hc:TabItem FontSize="16" Header="设置">

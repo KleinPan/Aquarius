@@ -3,7 +3,26 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyVersion>1.2020.0404.0</AssemblyVersion>
+    <FileVersion>1.2020.0404.0</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\test.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\test.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
+    <PackageReference Include="HandyControl" Version="2.4.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.3.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.3.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AquariusInterfaces\AquariusInterfaces.csproj" />

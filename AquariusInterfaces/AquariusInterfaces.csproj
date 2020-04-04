@@ -3,8 +3,8 @@
   <PropertyGroup>
     <UseWPF>true</UseWPF>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyVersion>1.2020.0401.0</AssemblyVersion>
-    <FileVersion>1.2020.0401.0</FileVersion>
+    <AssemblyVersion>1.2020.0404.0</AssemblyVersion>
+    <FileVersion>1.2020.0404.0</FileVersion>
   </PropertyGroup>
 
 </Project>
