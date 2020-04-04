@@ -8,12 +8,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>E:\工作\GitHub\Aquarius\Aquarius\bin\Debug\netcoreapp3.1\PluginsDefault\</OutputPath>
-    <DocumentationFile>E:\工作\GitHub\Aquarius\DropYouRem\DropYouRem.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\test.jpg" />
+    <None Remove="Resources\test.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,5 +33,15 @@
   <ItemGroup>
     <ProjectReference Include="..\AquariusInterfaces\AquariusInterfaces.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(TargetDir) &quot;E:\工作\GitHub\Aquarius\Aquarius\bin\Debug\netcoreapp3.1\PluginsDefault\&quot;" />
+  </Target>
 
 </Project>

@@ -16,8 +16,8 @@ namespace Aquarius
 
             //加载实现类的程序集
 
-            List<string> defaultFileList = System.IO.Directory.EnumerateFiles(Configs.Paths.pluginPathDefault).ToList();
-            List<string> userFileList = System.IO.Directory.EnumerateFiles(Configs.Paths.pluginPathForUser).ToList();
+            List<string> defaultFileList = System.IO.Directory.EnumerateFiles(Configs.Paths.pluginPathDefault).Where(x=>x.EndsWith(".dll")).ToList();
+            List<string> userFileList = System.IO.Directory.EnumerateFiles(Configs.Paths.pluginPathForUser).Where(x => x.EndsWith(".dll")).ToList();
 
             foreach (var item in defaultFileList)
             {

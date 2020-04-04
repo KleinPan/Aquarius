@@ -23,6 +23,7 @@ namespace DropYouRem.Views
         public RemSpriteView()
         {
             InitializeComponent();
+            var baseUri = BaseUriHelper.GetBaseUri(this);
         }
 
         public void Dispose()
