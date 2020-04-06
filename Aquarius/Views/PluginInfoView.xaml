@@ -10,13 +10,41 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Command="{Binding InstallCommand}" Content="加载" />
             <Button Content="刷新" />
             <Button Content="卸载" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="10" />
+                </Style>
+                <Style TargetType="TextBlock">
+
+                    <Setter Property="Margin" Value="10,0" />
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel>
+                <TextBlock>作者:</TextBlock>
+                <TextBlock Foreground="Black" Text="{Binding pluginInfo.Author}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock>版本:</TextBlock>
+                <TextBlock Text="{Binding pluginInfo.AssemblyInfo.VersionInfo.Version}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock>许可:</TextBlock>
+                <TextBlock Text="{Binding pluginInfo.AssemblyInfo.CopyrightInfo.Copyright}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock>描述:</TextBlock>
+                <TextBlock Text="{Binding pluginInfo.Description}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

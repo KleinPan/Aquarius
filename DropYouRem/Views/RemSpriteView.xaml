@@ -31,7 +31,7 @@
 
             <!--<hc:GifImage x:Name="GifImageMain" Uri="{Binding GifURI}"></hc:GifImage>-->
 
-
+            
         </Border>
     </Grid>
     <Button Width="22" Height="22" Padding="0" 
@@ -43,5 +43,5 @@
             Foreground="White"
             Style="{StaticResource ButtonIcon}"
             Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=hc:SimplePanel}, Converter={StaticResource Boolean2VisibilityConverter}}" />
-  
+
 </hc:SimplePanel>

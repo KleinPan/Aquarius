@@ -10,6 +10,11 @@ namespace AquariusInterfaces
         /// <summary> ÃèÊö </summary>
         string Description { get; }
 
+        /// <summary>
+        /// ×÷Õß
+        /// </summary>
+        public string Author { get;  }
+
         public Control Show();
     }
 }

@@ -7,6 +7,8 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            Width="800" Height="500" d:DesignHeight="250"
            d:DesignWidth="400" mc:Ignorable="d">
+
+
     <Grid>
         <hc:TabControl Style="{StaticResource TabControlBaseStyle}">
             <hc:TabItem FontSize="16" Header="插件">
