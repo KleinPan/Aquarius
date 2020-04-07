@@ -7,7 +7,11 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            Width="800" Height="500" d:DesignHeight="250"
            d:DesignWidth="400" mc:Ignorable="d">
-
+    <hc:Window.Resources>
+        <Style x:Key="cusListViewItemStyle" BasedOn="{StaticResource ListViewItemBaseStyle}" TargetType="ListViewItem">
+            <Setter Property="MinHeight" Value="0" />
+        </Style>
+    </hc:Window.Resources>
 
     <Grid>
         <hc:TabControl Style="{StaticResource TabControlBaseStyle}">
@@ -17,16 +21,15 @@
                         <ColumnDefinition Width="0.382*" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="0.618*" />
-                        <!--<ColumnDefinition  />
+                        <!--<ColumnDefinition />
                         <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition/>-->
-
+                        <ColumnDefinition />-->
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <ListView FontSize="15" ItemsSource="{Binding OCPlugIns}">
+                    <ListView FontSize="15" ItemContainerStyle="{StaticResource cusListViewItemStyle}" ItemsSource="{Binding OCPlugIns}">
                         <hc:Interaction.Triggers>
                             <hc:EventTrigger EventName="SelectionChanged">
                                 <hc:EventToCommand Command="{Binding PluginsSwitchItemCmd}" PassEventArgsToCommand="True" />
@@ -36,7 +39,6 @@
                             <GridView>
                                 <GridViewColumn Width="80" DisplayMemberBinding="{Binding ID}" Header="索引" />
                                 <GridViewColumn Width="100" DisplayMemberBinding="{Binding Name}" Header="名称" />
-
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -54,10 +56,9 @@
                         <ColumnDefinition Width="0.382*" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="0.618*" />
-                        <!--<ColumnDefinition  />
+                        <!--<ColumnDefinition />
                         <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition/>-->
-
+                        <ColumnDefinition />-->
                     </Grid.ColumnDefinitions>
 
                     <hc:SideMenu>
@@ -80,5 +81,4 @@
             </hc:TabItem>
         </hc:TabControl>
     </Grid>
-
 </hc:Window>
