@@ -13,14 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\test.jpg" />
     <None Remove="Resources\test.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\test.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,13 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\test.png">
+    <Content Include="Resources\test.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(TargetDir) &quot;E:\工作\GitHub\Aquarius\Aquarius\bin\Debug\netcoreapp3.1\PluginsDefault\&quot;" />
+    <Exec Command="xcopy $(TargetDir) &quot;E:\工作\GitHub\Aquarius\Aquarius\bin\Debug\netcoreapp3.1\PluginsDefault\&quot; /S /Y" />
   </Target>
 
 </Project>

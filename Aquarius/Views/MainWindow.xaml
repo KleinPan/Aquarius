@@ -25,6 +25,8 @@
                 <ContextMenu DataContext="{Binding Source={StaticResource BindingProxy},Path=Data}">
 
                     <MenuItem Command="{Binding OpenSettingCommand}" Header="设置" />
+                    <MenuItem Command="{Binding CheckUpdateCommand}" Header="检查更新" />
+
                     <MenuItem Command="hc:ControlCommands.ShutdownApp" Header="退出程序" />
                 </ContextMenu>
             </hc:NotifyIcon.ContextMenu>
