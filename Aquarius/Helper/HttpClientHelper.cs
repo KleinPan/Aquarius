@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -43,8 +44,8 @@ namespace Aquarius.Helper
             var httpclient = HttpClientHelper.HttpClient;
        
 
-            Progress<float> progress = new System.Progress<float>();
-            progress.ProgressChanged += Progress_ProgressChanged;
+            Progress<float> progress = new System.Progress<float>(x=> NotifyProgress(x));
+            //progress.ProgressChanged += Progress_ProgressChanged;
 
             // Create a file stream to store the downloaded data. This really can be any type of writeable stream.
             string filePathTemp = filePath + "//" + fileName;
@@ -60,11 +61,14 @@ namespace Aquarius.Helper
                 await httpclient.DownloadAsync(downloadUrl, file, progress, source.Token);
             }
         }
+        public delegate void ProgressReport(float progress);
+        public static event ProgressReport NotifyProgress;
 
         private static void Progress_ProgressChanged(object sender, float e)
         {
-            Console.WriteLine(e.ToString());
-            System.Diagnostics.Debug.WriteLine(e);
+            // Console.WriteLine(e.ToString());
+            // System.Diagnostics.Debug.WriteLine(e);
+            NotifyProgress?.Invoke(e);
         }
     }
 
