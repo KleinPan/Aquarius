@@ -1,0 +1,11 @@
+﻿[
+  {
+    "Command": "Copy",
+    "TargetDirectory": "C:\\"
+  },
+  {
+    "Command": "Cut",
+    "TargetDirectory": "D:\\"
+  }
+
+]

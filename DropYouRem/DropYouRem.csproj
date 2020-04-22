@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Config\Config.json" />
     <None Remove="Resources\test.png" />
   </ItemGroup>
 
@@ -28,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Config\Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\test.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
