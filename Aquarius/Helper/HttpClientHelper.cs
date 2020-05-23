@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,12 +10,15 @@ namespace Aquarius.Helper
     internal class HttpClientHelper
     {
         private static readonly HttpClient HttpClient;
+        public static CancellationTokenSource source;
 
         static HttpClientHelper()
         {
             var handler = new SocketsHttpHandler() { };
 
             HttpClient = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(10) };
+
+            source = new CancellationTokenSource();
         }
 
         public static async void DownloadLittleAsync(Dictionary<string, string> paramArray, string url, string filePath, string fileName)
@@ -42,9 +44,8 @@ namespace Aquarius.Helper
         public static async void Download(string downloadUrl, string filePath, string fileName)
         {
             var httpclient = HttpClientHelper.HttpClient;
-       
 
-            Progress<float> progress = new System.Progress<float>(x=> NotifyProgress(x));
+            Progress<float> progress = new System.Progress<float>(x => NotifyProgress(x));
             //progress.ProgressChanged += Progress_ProgressChanged;
 
             // Create a file stream to store the downloaded data. This really can be any type of writeable stream.
@@ -56,18 +57,23 @@ namespace Aquarius.Helper
             }
             using (var file = new FileStream(filePathTemp, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                CancellationTokenSource source = new CancellationTokenSource();
                 // Use the custom extension method below to download the data. The passed progress-instance will receive the download status updates.
                 await httpclient.DownloadAsync(downloadUrl, file, progress, source.Token);
             }
         }
+
         public delegate void ProgressReport(float progress);
+
         public static event ProgressReport NotifyProgress;
+
+        public static void StopDownLoad()
+        {
+            source.Cancel();
+        }
 
         private static void Progress_ProgressChanged(object sender, float e)
         {
-            // Console.WriteLine(e.ToString());
-            // System.Diagnostics.Debug.WriteLine(e);
+            // Console.WriteLine(e.ToString()); System.Diagnostics.Debug.WriteLine(e);
             NotifyProgress?.Invoke(e);
         }
     }

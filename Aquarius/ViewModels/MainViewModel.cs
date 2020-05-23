@@ -58,7 +58,7 @@ namespace Aquarius.ViewModels
 
         private void CheckUpdateEvent()
         {
-            string url1 = "https://www.rlvision.com/files/Snap2HTML.zip";
+            string url1 = "https://56992f2d790002eb5da84202376812c4.dlied1.cdntips.com/dlied1.qq.com/qqweb/PCQQ/PCQQ_EXE/PCQQ2020.exe?mkey=5ec8b5c7ca640553&f=0ae7&cip=202.100.35.166&proto=https&access_type=$header_ApolloNet";
             HttpClientHelper.NotifyProgress += ShowProgress;
             HttpClientHelper.Download(url1, @"E:\下载汇总\转存默认目录", "123.zip");
         }

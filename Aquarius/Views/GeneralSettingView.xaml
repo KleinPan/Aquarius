@@ -9,6 +9,7 @@
     <Grid>
         <UniformGrid Columns="3" Rows="3">
             <CheckBox IsChecked="{Binding AutoStart}">开机自启动</CheckBox>
+            <Button Command="{Binding CheckUpdateCmd}">检查更新</Button>
         </UniformGrid>
     </Grid>
 </UserControl>

@@ -30,13 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AquariusInterfaces\AquariusInterfaces.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\1\Desktop\Download\水瓶座.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <ProjectReference Include="..\AutoUpdate\AutoUpdate.csproj" />
   </ItemGroup>
 
   <ItemGroup>
