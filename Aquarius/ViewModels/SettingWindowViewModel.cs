@@ -39,13 +39,18 @@ namespace Aquarius.ViewModels
 
         [Reactive]
         public PluginInfoViewModel CurrentPluginInfoVM { get; set; }
+
+        [Reactive]
+        GeneralSettingViewModel generalSettingViewModel { get; set; }
         public SettingWindowViewModel()
         {
             SelectCommand = ReactiveCommand.Create<object>(SelectEvent);
             SwitchItemCmd = ReactiveCommand.Create<FunctionEventArgs<object>>(SwitchItemEvent);
             PluginsSwitchItemCmd = ReactiveCommand.Create<object>(PluginsSwitchItemEvent);
             ScanPluginsCommand = ReactiveCommand.Create(ScanPluginsEvent);
-           
+
+
+            generalSettingViewModel=new GeneralSettingViewModel();
         }
 
       
@@ -93,7 +98,7 @@ namespace Aquarius.ViewModels
             switch (title)
             {
                 case "≥£πÊ…Ë÷√":
-                    CContent = new GeneralSettingViewModel();
+                    CContent = generalSettingViewModel;
 
                     break;
 
