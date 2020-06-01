@@ -43,7 +43,7 @@ namespace One.AutoUpdater
         /// </summary>
         public static bool ReportErrors = true;
 
-        /// <summary> Login/password/domain for FTP-request FTP请求的登录名/密码/域</summary>
+        /// <summary> Login/password/domain for FTP-request FTP请求的登录名/密码/域 </summary>
         public static NetworkCredential FtpCredentials;
 
         /// <summary> Set the User-Agent string to be used for HTTP web requests. 设置用于HTTP Web请求的User-Agent字符串。 </summary>
@@ -66,8 +66,6 @@ namespace One.AutoUpdater
             return string.IsNullOrEmpty(HttpUserAgent) ? $"AutoUpdate_Bran" : HttpUserAgent;
         }
 
-   
-
         /// <summary> Set the Application Title shown in Update dialog. Although AutoUpdater.NET will get it automatically, you can set this property if you like to give custom Title. </summary>
         public static string AppTitle;
 
@@ -83,8 +81,6 @@ namespace One.AutoUpdater
 
         /// <summary> An event that clients can use to be notified whenever the AppCast file needs parsing. </summary>
         public static event ParseUpdateInfoHandler ParseUpdateInfoEvent;
-
-
 
         /// <summary> If this is true users can see the skip button. </summary>
         public static bool ShowSkipButton = true;
@@ -144,7 +140,6 @@ namespace One.AutoUpdater
 
                 Assembly assembly = myAssembly ?? Assembly.GetEntryAssembly();
 
-               
                     using (var backgroundWorker = new BackgroundWorker())
                     {
                         backgroundWorker.DoWork += (sender, args) =>
@@ -181,7 +176,6 @@ namespace One.AutoUpdater
 
                         backgroundWorker.RunWorkerAsync(assembly);
                     }
-                
             }
         }
 
@@ -271,7 +265,6 @@ namespace One.AutoUpdater
                     args.InstalledVersion < new Version(args.Mandatory.MinimumVersion))
                 {
                     Mandatory = args.Mandatory.Value;
-
                 }
             }
 
@@ -335,7 +328,6 @@ namespace One.AutoUpdater
                                 DownloadUpdate(args);
                                 Exit();
                             }
-
                             else
                             {
                                 if (DownloadUpdate(args))
@@ -346,11 +338,8 @@ namespace One.AutoUpdater
                                 {
                                     Console.WriteLine("取消更新！");
 
-
                                     return false;
                                 }
-                               
-                                
                             }
 
                             return true;
@@ -498,53 +487,38 @@ namespace One.AutoUpdater
             }
         }
 
-        /// <summary>
-        /// Shows standard update dialog.
-        /// </summary>
+        /// <summary> Shows standard update dialog. </summary>
         public static void ShowUpdateForm(UpdateInfoEventArgs args)
         {
-           
         }
     }
 
-    //
-    // 摘要:
-    //     Specifies identifiers to indicate the return value of a dialog box.
+    // 摘要: Specifies identifiers to indicate the return value of a dialog box.
     [ComVisible(true)]
     public enum DialogResult
     {
-        //
-        // 摘要:
-        //     Nothing is returned from the dialog box. This means that the modal dialog continues
-        //     running.
+        // 摘要: Nothing is returned from the dialog box. This means that the modal dialog continues running.
         None = 0,
-        //
-        // 摘要:
-        //     The dialog box return value is OK (usually sent from a button labeled OK).
+
+        // 摘要: The dialog box return value is OK (usually sent from a button labeled OK).
         OK = 1,
-        //
-        // 摘要:
-        //     The dialog box return value is Cancel (usually sent from a button labeled Cancel).
+
+        // 摘要: The dialog box return value is Cancel (usually sent from a button labeled Cancel).
         Cancel = 2,
-        //
-        // 摘要:
-        //     The dialog box return value is Abort (usually sent from a button labeled Abort).
+
+        // 摘要: The dialog box return value is Abort (usually sent from a button labeled Abort).
         Abort = 3,
-        //
-        // 摘要:
-        //     The dialog box return value is Retry (usually sent from a button labeled Retry).
+
+        // 摘要: The dialog box return value is Retry (usually sent from a button labeled Retry).
         Retry = 4,
-        //
-        // 摘要:
-        //     The dialog box return value is Ignore (usually sent from a button labeled Ignore).
+
+        // 摘要: The dialog box return value is Ignore (usually sent from a button labeled Ignore).
         Ignore = 5,
-        //
-        // 摘要:
-        //     The dialog box return value is Yes (usually sent from a button labeled Yes).
+
+        // 摘要: The dialog box return value is Yes (usually sent from a button labeled Yes).
         Yes = 6,
-        //
-        // 摘要:
-        //     The dialog box return value is No (usually sent from a button labeled No).
+
+        // 摘要: The dialog box return value is No (usually sent from a button labeled No).
         No = 7
     }
 }

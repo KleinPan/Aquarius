@@ -1,32 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reactive;
-using System.Text;
-using System.Windows.Forms;
+
 using Aquarius.Base;
-using One.AutoUpdater.UpdateEventArgs;
-using One.AutoUpdater;
+
 using Newtonsoft.Json;
+
+using One.AutoUpdater;
+using One.AutoUpdater.UpdateEventArgs;
+
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using One.AutoUpdater.UpdateEventArgs;
 
 namespace Aquarius.ViewModels
 {
-    class GeneralSettingViewModel: BaseViewModel
+    internal class GeneralSettingViewModel : BaseViewModel
     {
         [Reactive]
         public bool AutoStart { get; set; } = true;
 
         public ReactiveCommand<Unit, Unit> CheckUpdateCmd { get; private set; }
 
-
         public GeneralSettingViewModel()
         {
             CheckUpdateCmd = ReactiveCommand.Create(CheckUpdate);
 
-            AutoUpdater.DownloadPath =Configs.Paths.downloadPath ;
+            AutoUpdater.DownloadPath = Configs.Paths.downloadPath;
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
             //AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;//没有执行
@@ -34,17 +31,11 @@ namespace Aquarius.ViewModels
 
         private void CheckUpdate()
         {
-            
-           
-            
-
             AutoUpdater.Start("ftp://117.33.179.181//Version.json", new System.Net.NetworkCredential("FtpTest", "123456"));
         }
 
-
         #region AutoUpdate第三方
 
-        
         // UpdateInfoEventArgs json;
         private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
         {
@@ -57,7 +48,7 @@ namespace Aquarius.ViewModels
                 Mandatory = new Mandatory
                 {
                     Value = json.mandatory.value,
-                    
+
                     MinimumVersion = json.mandatory.minVersion
                 },
                 CheckSum = new CheckSum
@@ -75,6 +66,6 @@ namespace Aquarius.ViewModels
             App.Current.Shutdown();
         }
 
-        #endregion AutoUpdate
+        #endregion AutoUpdate第三方
     }
 }
