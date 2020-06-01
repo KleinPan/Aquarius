@@ -26,6 +26,7 @@ namespace Aquarius.ViewModels
         {
             CheckUpdateCmd = ReactiveCommand.Create(CheckUpdate);
 
+            AutoUpdater.DownloadPath =Configs.Paths.downloadPath ;
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
             //AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;//没有执行
@@ -43,66 +44,7 @@ namespace Aquarius.ViewModels
 
         #region AutoUpdate第三方
 
-        private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
-        {
-            if (args != null)
-            {
-                if (args.IsUpdateAvailable)
-                {
-                    DialogResult dialogResult;
-                    if (args.Mandatory.Value)
-                    {
-                        dialogResult =
-                            MessageBox.Show(
-                                $@"There is new version {args.CurrentVersion} available. You are using version {args.InstalledVersion}. This is required update. Press Ok to begin updating the application.", @"Update Available",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        dialogResult =
-                            MessageBox.Show(
-                                $@"There is new version {args.CurrentVersion} available. You are using version {
-                                        args.InstalledVersion
-                                    }. Do you want to update the application now?", @"Update Available",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Information);
-                    }
-
-          
-
-                    if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.OK))
-                    {
-                        try
-                        {
-                            if ( AutoUpdater.DownloadUpdate(args))
-                            {
-                                //Application.Exit();
-                                //等待程序关闭并进行其他操作
-                                App.Current.Shutdown();
-                            }
-                        }
-                        catch (Exception exception)
-                        {
-                            MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(@"There is no update available please try again later.", @"No update available",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show(
-                        @"There is a problem reaching update server please check your internet connection and try again later.",
-                        @"Update check failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        
         // UpdateInfoEventArgs json;
         private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
         {
@@ -115,7 +57,7 @@ namespace Aquarius.ViewModels
                 Mandatory = new Mandatory
                 {
                     Value = json.mandatory.value,
-                    UpdateMode = json.mandatory.mode,
+                    
                     MinimumVersion = json.mandatory.minVersion
                 },
                 CheckSum = new CheckSum

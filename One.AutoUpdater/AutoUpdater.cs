@@ -17,6 +17,7 @@ using One.AutoUpdater.Interfaces;
 using One.AutoUpdater.Utilities;
 
 using One.Core.Helper;
+using System.Runtime.InteropServices;
 
 namespace One.AutoUpdater
 {
@@ -42,13 +43,13 @@ namespace One.AutoUpdater
         /// </summary>
         public static bool ReportErrors = true;
 
-        /// <summary> Login/password/domain for FTP-request </summary>
+        /// <summary> Login/password/domain for FTP-request FTP请求的登录名/密码/域</summary>
         public static NetworkCredential FtpCredentials;
 
-        /// <summary> Set the User-Agent string to be used for HTTP web requests. 设置下载文件所需的基本身份验证凭据。 </summary>
+        /// <summary> Set the User-Agent string to be used for HTTP web requests. 设置用于HTTP Web请求的User-Agent字符串。 </summary>
         public static string HttpUserAgent;
 
-        /// <summary> Set Basic Authentication credentials required to download the file. </summary>
+        /// <summary> Set Basic Authentication credentials required to download the file.设置下载文件所需的基本身份验证凭据。 </summary>
         public static IAuthentication BasicAuthDownload;
 
         ///<summary>
@@ -65,8 +66,7 @@ namespace One.AutoUpdater
             return string.IsNullOrEmpty(HttpUserAgent) ? $"AutoUpdate_Bran" : HttpUserAgent;
         }
 
-        /// <summary> Set this to true if you want to run update check synchronously. 如果要同步运行更新检查，请将此设置为true。 </summary>
-        public static bool Synchronous = false;
+   
 
         /// <summary> Set the Application Title shown in Update dialog. Although AutoUpdater.NET will get it automatically, you can set this property if you like to give custom Title. </summary>
         public static string AppTitle;
@@ -84,8 +84,7 @@ namespace One.AutoUpdater
         /// <summary> An event that clients can use to be notified whenever the AppCast file needs parsing. </summary>
         public static event ParseUpdateInfoHandler ParseUpdateInfoEvent;
 
-        /// <summary> Set this to any of the available modes to change behaviour of the Mandatory flag. </summary>
-        public static Mode UpdateMode;
+
 
         /// <summary> If this is true users can see the skip button. </summary>
         public static bool ShowSkipButton = true;
@@ -145,21 +144,7 @@ namespace One.AutoUpdater
 
                 Assembly assembly = myAssembly ?? Assembly.GetEntryAssembly();
 
-                if (Synchronous)
-                {
-                    try
-                    {
-                        var result = CheckUpdate(assembly);
-
-                        Running = StartUpdate(result);
-                    }
-                    catch (Exception exception)
-                    {
-                        ShowError(exception);
-                    }
-                }
-                else
-                {
+               
                     using (var backgroundWorker = new BackgroundWorker())
                     {
                         backgroundWorker.DoWork += (sender, args) =>
@@ -181,7 +166,12 @@ namespace One.AutoUpdater
                                 {
                                     if (StartUpdate(args.Result))
                                     {
+                                        //Running = false;
                                         return;
+                                    }
+                                    else
+                                    {
+                                        Running = false;
                                     }
                                 }
                             }
@@ -191,7 +181,7 @@ namespace One.AutoUpdater
 
                         backgroundWorker.RunWorkerAsync(assembly);
                     }
-                }
+                
             }
         }
 
@@ -281,7 +271,7 @@ namespace One.AutoUpdater
                     args.InstalledVersion < new Version(args.Mandatory.MinimumVersion))
                 {
                     Mandatory = args.Mandatory.Value;
-                    UpdateMode = args.Mandatory.UpdateMode;
+
                 }
             }
 
@@ -340,30 +330,27 @@ namespace One.AutoUpdater
                     {
                         if (args.IsUpdateAvailable)
                         {
-                            if (Mandatory && UpdateMode == Mode.ForcedDownload)
+                            if (Mandatory)
                             {
                                 DownloadUpdate(args);
                                 Exit();
                             }
-                            else if (Mandatory && UpdateMode == Mode.Forced)
-                            {
 
-                            }
                             else
                             {
-                                //if (Thread.CurrentThread.GetApartmentState().Equals(ApartmentState.STA))
-                                //{
-                                //    ShowUpdateForm(args);
-                                //}
-                                //else
-                                //{
-                                //    Thread thread = new Thread(new ThreadStart(delegate { ShowUpdateForm(args); }));
-                                //    thread.CurrentCulture =
-                                //        thread.CurrentUICulture = CultureInfo.CurrentCulture;
-                                //    thread.SetApartmentState(ApartmentState.STA);
-                                //    thread.Start();
-                                //    thread.Join();
-                                //}
+                                if (DownloadUpdate(args))
+                                {
+                                    Exit();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("取消更新！");
+
+
+                                    return false;
+                                }
+                               
+                                
                             }
 
                             return true;
@@ -436,7 +423,10 @@ namespace One.AutoUpdater
             //    }
             //}
 
-            return false;
+            var downloadDialog = new MainWindow(args);
+          var temp=  downloadDialog.ShowDialog();
+
+            return (bool)temp;
         }
 
         private static void ShowError(Exception exception)
@@ -481,7 +471,7 @@ namespace One.AutoUpdater
                     }
 
                     //get all instances of assembly except current
-                    if (process.Id != currentProcess.Id &&currentProcess.MainModule.FileName == processPath) 
+                    if (process.Id != currentProcess.Id && currentProcess.MainModule.FileName == processPath)
                     {
                         if (process.CloseMainWindow())
                         {
@@ -513,18 +503,48 @@ namespace One.AutoUpdater
         /// </summary>
         public static void ShowUpdateForm(UpdateInfoEventArgs args)
         {
-            //using (var updateForm = new UpdateForm(args))
-            //{
-            //    if (UpdateFormSize.HasValue)
-            //    {
-            //        updateForm.Size = UpdateFormSize.Value;
-            //    }
-
-            //    if (updateForm.ShowDialog().Equals(DialogResult.OK))
-            //    {
-            //        Exit();
-            //    }
-            //}
+           
         }
+    }
+
+    //
+    // 摘要:
+    //     Specifies identifiers to indicate the return value of a dialog box.
+    [ComVisible(true)]
+    public enum DialogResult
+    {
+        //
+        // 摘要:
+        //     Nothing is returned from the dialog box. This means that the modal dialog continues
+        //     running.
+        None = 0,
+        //
+        // 摘要:
+        //     The dialog box return value is OK (usually sent from a button labeled OK).
+        OK = 1,
+        //
+        // 摘要:
+        //     The dialog box return value is Cancel (usually sent from a button labeled Cancel).
+        Cancel = 2,
+        //
+        // 摘要:
+        //     The dialog box return value is Abort (usually sent from a button labeled Abort).
+        Abort = 3,
+        //
+        // 摘要:
+        //     The dialog box return value is Retry (usually sent from a button labeled Retry).
+        Retry = 4,
+        //
+        // 摘要:
+        //     The dialog box return value is Ignore (usually sent from a button labeled Ignore).
+        Ignore = 5,
+        //
+        // 摘要:
+        //     The dialog box return value is Yes (usually sent from a button labeled Yes).
+        Yes = 6,
+        //
+        // 摘要:
+        //     The dialog box return value is No (usually sent from a button labeled No).
+        No = 7
     }
 }

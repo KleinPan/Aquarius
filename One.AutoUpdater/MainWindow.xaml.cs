@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using One.AutoUpdater.UpdateEventArgs;
 using One.AutoUpdater.Utilities;
 
 
@@ -16,46 +17,55 @@ namespace One.AutoUpdater
     {
 
         private MyWebClient _webClient;
+
+        /// <summary>
+        /// 临时文件夹路径
+        /// </summary>
         private string _tempFile;
         private DateTime _startedAt;
-        public MainWindow(string[] args)
-        {
-            InitializeComponent();
-            if (args.Length > 1)
-            {
-                filePath = args[0].Trim();
-                startPath = args[1].Trim();
-            }
-
-            Loaded += UpdateView_Loaded;
-            Closing += UpdateView_Closing;
-            btn_Cancel.Click += Btn_Cancel_Click;
-            btn_Update.Click += Btn_Update_Click;
-        }
-        public MainWindow(string args)
-        {
-            InitializeComponent();
-            filePath = args;
-
-            Loaded += UpdateView_Loaded;
-            Closing += UpdateView_Closing;
-            btn_Cancel.Click += Btn_Cancel_Click;
-            btn_Update.Click += Btn_Update_Click;
-        }
-
 
         private string filePath = string.Empty; //下载文件路径
-        private string startPath = string.Empty; //启动程序路径
-        private long contentLength = 0;  //文件总长度
-        private long currentLength = 0;  //当前下载长度
-        private string directory = string.Empty; //创建临时文件夹
+
         private bool isDownLoading = false; //是否正在下载标志
+
+        //public bool result = false;
+        public MainWindow(UpdateInfoEventArgs args)
+        {
+            InitializeComponent();
+            filePath = args.DownloadURL;
+
+            Loaded += UpdateView_Loaded;
+     
+            btn_Cancel.Click += Btn_Cancel_Click;
+            btn_Update.Click += Btn_Update_Click;
+            Closing += MainWindow_Closing;
+
+            txbTip.Text = $@"有新版本{args.CurrentVersion}可用，当前使用版本为{ args.InstalledVersion}";
+        }
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (_webClient == null)
+            {
+                
+            }
+            else if (_webClient.IsBusy)
+            {
+                _webClient.CancelAsync();
+               
+            }
+            else
+            {
+                
+            }
+           // DialogResult = false;
+        }
 
         private async void Btn_Update_Click(object sender, RoutedEventArgs e)
         {
 
 
-            AutoUpdater.Start("ftp://117.33.179.181//Version.json", new NetworkCredential("FtpTest", "123456"));
+
 
 
 
@@ -69,6 +79,7 @@ namespace One.AutoUpdater
 
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             this.Close();
         }
 
@@ -97,7 +108,20 @@ namespace One.AutoUpdater
             this.lbl_size.Text = size;
 #endif
 
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(filePath);
+            request.Method = WebRequestMethods.Ftp.GetFileSize;
 
+
+
+            request.Credentials = AutoUpdater.FtpCredentials;
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+
+            Stream responseStream = response.GetResponseStream();
+            bytes_total = response.ContentLength; //这是一个int成员变量，用于以后存储
+                                                  // Console.WriteLine（Fetch Complete，ContentLength { 0}，response.ContentLength）;
+            response.Close();
+
+            lbl_size.Text = BytesToString(bytes_total);
         }
 
         private async Task DownLoadWithFTP()
@@ -119,17 +143,29 @@ namespace One.AutoUpdater
                 }
             }
 
+
+           
+
+
             _webClient.DownloadProgressChanged += OnDownloadProgressChanged;
 
             _webClient.DownloadFileCompleted += WebClientOnDownloadFileCompleted;
 
+
+          
             _webClient.DownloadFileAsync(uri, _tempFile);
 
-        }
 
+
+        }
+        long bytes_total=-1;
         private void WebClientOnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
 
+            this.isDownLoading = false;
+         this.   DialogResult = true;
+
+            this.Close();
         }
 
         private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -145,15 +181,19 @@ namespace One.AutoUpdater
                 if (totalSeconds > 0)
                 {
                     var bytesPerSecond = e.BytesReceived / totalSeconds;
-                    lbl_speed.Text = BytesToString(bytesPerSecond);
+                    lbl_speed.Text = BytesToString(bytesPerSecond)+"/s";
                 }
             }
 
 
 
-            lbl_size.Text = BytesToString(e.TotalBytesToReceive);
+            //lbl_size.Text = BytesToString(e.TotalBytesToReceive);
             lbl_currentSize.Text = $@"{BytesToString(e.BytesReceived)}";
-            prob.Value = e.ProgressPercentage;
+            //prob.Value = e.ProgressPercentage;
+
+            double temp = (double)(e.BytesReceived) / (bytes_total);
+           
+            prob.Value = Math.Round(temp * 100,2);
         }
 
 
@@ -170,16 +210,10 @@ namespace One.AutoUpdater
         }
 
 
-        private void UpdateView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (this.isDownLoading)
-            {
-                e.Cancel = true;
-            }
-        }
-
        
 
-     
+
     }
+
+  
 }

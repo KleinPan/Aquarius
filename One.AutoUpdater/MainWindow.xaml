@@ -22,13 +22,16 @@
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition  Height="auto" />
                 <RowDefinition />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
+            <Grid>
+                <TextBlock VerticalAlignment="Center" Margin="10" Name="txbTip"></TextBlock>
+            </Grid>
+            <ProgressBar Grid.Row="1" Name="prob" Height="40"  Margin="10,0,10,0" VerticalAlignment="Bottom" Foreground="#1C86EE" />
 
-            <ProgressBar Name="prob" Height="40" Margin="10,0,10,0" VerticalAlignment="Bottom" Foreground="#1C86EE" />
-
-            <Grid Grid.Row="1" VerticalAlignment="Top">
+            <Grid Grid.Row="2" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />

@@ -16,6 +16,9 @@ namespace Aquarius.Configs
         /// <summary> 用户插件路径 </summary>
         public static string pluginPathForUser { get; set; }
 
+
+        /// <summary> 用户插件路径 </summary>
+        public static string downloadPath { get; set; }
         static Paths()
         {
             exePath = System.IO.Directory.GetCurrentDirectory();
@@ -28,6 +31,9 @@ namespace Aquarius.Configs
 
             pluginPathForUser = exePath + @"\PluginsUser";
             Directory.CreateDirectory(pluginPathForUser);
+
+            downloadPath = exePath + @"\Download";
+            Directory.CreateDirectory(downloadPath);
         }
     }
 }
