@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
-            <Image Width="25" Height="25" HorizontalAlignment="Left" Source="/update.ico" />
+            <Image Width="25" Height="25" HorizontalAlignment="Left" Source="/One.AutoUpdater;component/update.ico" />
             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Text="软件版本升级" />
         </StackPanel>
 

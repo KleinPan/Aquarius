@@ -70,8 +70,6 @@ namespace Aquarius.ViewModels
             System.Diagnostics.Debug.WriteLine(x);
 
 
-            System.Diagnostics.Debug.WriteLine(x);
-
 
         }
         private void OpenSettingEvent()
