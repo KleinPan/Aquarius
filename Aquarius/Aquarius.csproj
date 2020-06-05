@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\One\One.AutoUpdater\One.AutoUpdater.csproj" />
     <ProjectReference Include="..\AquariusInterfaces\AquariusInterfaces.csproj" />
-    <ProjectReference Include="..\One.AutoUpdater\One.AutoUpdater.csproj" />
   </ItemGroup>
 
   <ItemGroup>

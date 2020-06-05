@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Aquarius.Configs
 {
-    public class Paths
+    public class PathConfig
     {
         /// <summary> 当前程序路径 </summary>
         public static string exePath { get; set; }
@@ -17,9 +17,9 @@ namespace Aquarius.Configs
         public static string pluginPathForUser { get; set; }
 
 
-        /// <summary> 用户插件路径 </summary>
+        /// <summary> 下载文件路径 </summary>
         public static string downloadPath { get; set; }
-        static Paths()
+        static PathConfig()
         {
             exePath = System.IO.Directory.GetCurrentDirectory();
 

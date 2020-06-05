@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropYouRem", "DropYouRem\Dr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdatePrograms", "UpdatePrograms\UpdatePrograms.csproj", "{A8B22BD8-C774-4F50-8595-99F829B20D89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One.AutoUpdater", "One.AutoUpdater\One.AutoUpdater.csproj", "{770B84CE-7D4E-4854-8EF3-6EC2CEAC62BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "One.AutoUpdater", "..\One\One.AutoUpdater\One.AutoUpdater.csproj", "{37AACF9F-2732-4869-81BA-508B8D1448D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{A8B22BD8-C774-4F50-8595-99F829B20D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B22BD8-C774-4F50-8595-99F829B20D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B22BD8-C774-4F50-8595-99F829B20D89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{770B84CE-7D4E-4854-8EF3-6EC2CEAC62BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{770B84CE-7D4E-4854-8EF3-6EC2CEAC62BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{770B84CE-7D4E-4854-8EF3-6EC2CEAC62BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{770B84CE-7D4E-4854-8EF3-6EC2CEAC62BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AACF9F-2732-4869-81BA-508B8D1448D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AACF9F-2732-4869-81BA-508B8D1448D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AACF9F-2732-4869-81BA-508B8D1448D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AACF9F-2732-4869-81BA-508B8D1448D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

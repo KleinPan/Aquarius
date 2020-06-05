@@ -5,8 +5,7 @@ using Aquarius.Base;
 using Newtonsoft.Json;
 
 using One.AutoUpdater;
-using One.AutoUpdater.UpdateEventArgs;
-
+using One.AutoUpdater.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -23,10 +22,10 @@ namespace Aquarius.ViewModels
         {
             CheckUpdateCmd = ReactiveCommand.Create(CheckUpdate);
 
-            AutoUpdater.DownloadPath = Configs.Paths.downloadPath;
+            AutoUpdater.DownloadPath = Configs.PathConfig.downloadPath;
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
             //AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
-            AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;//Ã»ÓÐÖ´ÐÐ
+            AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
         }
 
         private void CheckUpdate()
