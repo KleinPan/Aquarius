@@ -70,7 +70,7 @@ namespace Aquarius.ViewModels
             //HttpClientHelper.NotifyProgress += ShowProgress;
             //HttpClientHelper.Download(url1, @"E:\下载汇总\转存默认目录", "123.zip");
 
-            AutoUpdater.Start("ftp://117.33.179.181//Version.json", new System.Net.NetworkCredential("FtpTest", "123456"));
+            AutoUpdater.Start("ftp://117.33.179.181//VersionA.json", new System.Net.NetworkCredential("FtpTest", "123456"));
         }
 
        

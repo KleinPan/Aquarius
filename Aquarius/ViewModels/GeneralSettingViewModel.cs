@@ -30,7 +30,7 @@ namespace Aquarius.ViewModels
 
         private void CheckUpdate()
         {
-            AutoUpdater.Start("ftp://117.33.179.181//Version.json", new System.Net.NetworkCredential("FtpTest", "123456"));
+            AutoUpdater.Start("ftp://117.33.179.181//VersionA.json", new System.Net.NetworkCredential("FtpTest", "123456"));
         }
 
         #region AutoUpdateµÚÈý·½
